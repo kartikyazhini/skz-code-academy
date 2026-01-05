@@ -63,31 +63,31 @@ function App() {
     if (nextIdx < lessons.length) {
       const nextLesson = lessons[nextIdx];
 
-      // 🚀 Check if we are crossing into a NEW section
       if (nextLesson.sectionId !== currentLesson.sectionId) {
-
-        // 1. Find the new module that contains this section
         const nextModule = modules.find(m =>
           m.sections.some(s => s.id === nextLesson.sectionId)
         );
 
         if (nextModule) {
-          // 2. UPDATE THE MODULE ID (This is the fix!)
           setActiveModuleId(nextModule.id);
-
           setUserProgress(prev => ({
             ...prev,
             currentSection: nextLesson.sectionId,
             currentModule: nextModule.id
           }));
         }
-
         setCurrentLessonIdx(nextIdx);
-        setCurrentView('intro'); // Show the NEW module's intro
+        setCurrentView('intro');
       } else {
         setCurrentLessonIdx(nextIdx);
       }
     } else {
+      // 🚀 CRITICAL: All lessons finished!
+      // Set currentSection to 6 to mark Module 5 as Mastered
+      setUserProgress(prev => ({
+        ...prev,
+        currentSection: 6
+      }));
       setCurrentView('dashboard');
     }
   };

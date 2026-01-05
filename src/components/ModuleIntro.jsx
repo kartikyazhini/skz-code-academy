@@ -25,74 +25,173 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
     2: {
       title: "Numeric Types & Math",
       icon: <Zap size={20} />,
-      concept: "Python is a powerful calculator. We use Integers for whole counts and Floats for precise decimals (like song durations).",
+      concept: "Python is a powerful calculator. We use Integers for whole counts (members) and Floats for precise decimals (song durations).",
       variableExamples: [
-        { label: "Integer (int)", value: "8", desc: "Whole numbers, no decimals." },
-        { label: "Float (float)", value: "3.45", desc: "Numbers with decimal points." },
-        { label: "Modulo (%)", value: "Remainder", desc: "Finds what's left after division." }
+        { label: "Integer (int)", value: "8", desc: "Whole numbers. Perfect for counting members or albums." },
+        { label: "Float (float)", value: "3.45", desc: "Numbers with decimal points. Used for track lengths." },
+        { label: "Operators", value: "+ - * / %", desc: "Symbols used to perform calculations between numbers." }
       ],
       dataTypesInfo: [
-        { type: "Addition (+)", desc: "Combine values.", example: "5 + 3" },
-        { type: "Multiplication (*)", desc: "Repeat values.", example: "8 * 2" },
-        { type: "Division (/)", desc: "Always results in a float.", example: "10 / 2 = 5.0" }
+        { type: "Addition (+)", desc: "Combine values together.", example: "5 + 3" },
+        { type: "Subtraction (-)", desc: "Find the difference.", example: "8 - 2" },
+        { type: "Multiplication (*)", desc: "Multiply or repeat values.", example: "8 * 2" },
+        { type: "Division (/)", desc: "Results in a float (decimal).", example: "10 / 2 = 5.0" },
+        { type: "Modulo (%)", desc: "Finds the remainder.", example: "10 % 3 = 1" }
       ],
-      practicalExample: "Calculating tour revenue or track lengths requires mixing ints and floats accurately.",
-      exampleCode: `track_count = 12\ntrack_length = 3.5  # minutes\ntotal_time = track_count * track_length\nprint(total_time)   # 42.0`,
-      whyItMatters: "Using the wrong math operator can break your logic. Master the symbols to master the data!"
+      practicalExample: "Mission: Calculate the stats for the upcoming SKZ World Tour. We need to handle track totals, time differences, and group divisions.",
+      exampleCode: `
+    # 1. Addition: Total members
+    vocal_line = 4
+    dance_line = 4
+    total_skz = vocal_line + dance_line  # 8
+
+    # 2. Subtraction: Remaining tracks to perform
+    total_setlist = 25
+    performed = 10
+    remaining = total_setlist - performed  # 15
+
+    # 3. Multiplication: Total tour duration
+    cities = 12
+    show_length = 2.5  # hours
+    total_hours = cities * show_length  # 30.0
+
+    # 4. Division: Average song length
+    total_album_time = 42.0
+    tracks = 12
+    avg_length = total_album_time / tracks  # 3.5
+
+    # 5. Modulo: Grouping members for a unit
+    # If we divide 8 members into teams of 3, how many are left?
+    leftover = 8 % 3  # 2`,
+      whyItMatters: "Computers never make math mistakes, but humans do! Using '/' instead of '%' can lead to incorrect logic in your programs."
     },
     3: {
       title: "Text Data (Strings)",
       icon: <Terminal size={20} />,
-      concept: "Strings are sequences of characters. In Python, we can manipulate text to create custom messages for Stays.",
+      concept: "Strings are sequences of characters wrapped in quotes. In Python, strings are 'immutable'—once created, you don't change them; you create new, modified versions of them.",
       variableExamples: [
-        { label: "Concatenation", value: "+", desc: "Gluing two strings together." },
-        { label: "F-Strings", value: "f'{}'", desc: "Plugging variables into text easily." },
-        { label: "Methods", value: ".upper()", desc: "Built-in tools to change text." }
+        { label: "Concatenation", value: "+", desc: "Joining two strings together into one." },
+        { label: "F-Strings", value: "f'{}'", desc: "The modern way to inject variables directly into text." },
+        { label: "Methods", value: ".upper() / .lower()", desc: "Built-in functions that transform text casing." }
       ],
       dataTypesInfo: [
-        { type: "len()", desc: "Counts every character.", example: "len('SKZ') # 3" },
-        { type: "Indexing", desc: "Get one letter. Starts at 0.", example: "'Felix'[0] # 'F'" },
-        { type: "Slicing", desc: "Grab a chunk of text.", example: "'StrayKids'[:5]" }
+        { type: "len()", desc: "Returns the total count of characters, including spaces.", example: "len('Stray Kids') # 10" },
+        { type: "Indexing [n]", desc: "Access a specific character using its position (starts at 0).", example: "'SKZ'[0] # 'S'" },
+        { type: "Slicing [start:end]", desc: "Extracts a portion of a string between two indices.", example: "'BangChan'[0:4] # 'Bang'" }
       ],
-      practicalExample: "Automating social media posts requires dynamic text using f-strings.",
-      exampleCode: `member = 'I.N'\nmessage = f"Welcome to the stage, {member}!"\nprint(message.upper())`,
-      whyItMatters: "Strings are how your code talks to the world. Formatting makes it professional."
+      practicalExample: "Mission: Generate automated concert announcements and verify member nicknames from the SKZ global database.",
+      exampleCode: `# 1. Concatenation: Joining text
+    prefix = "SKZ-"
+    id_num = "2024"
+    user_id = prefix + id_num  # "SKZ-2024"
+
+    # 2. F-Strings: Dynamic messaging
+    member = "Felix"
+    venue = "SoFi Stadium"
+    # f-strings let you drop variables into {}
+    announcement = f"Welcome {member} to the stage at {venue}!"
+
+    # 3. String Methods: Formatting
+    song = "s-class"
+    print(song.upper())      # "S-CLASS"
+    print(song.capitalize()) # "S-class"
+
+    # 4. Length: Validation
+    password = "skz_stay_forever"
+    length = len(password)   # 16
+
+    # 5. Indexing: Grab first letter
+    name = "Hyunjin"
+    first_initial = name[0]  # "H"
+
+    # 6. Slicing: Extracting a 'Sub-string'
+    # Grabs characters from index 0 up to (but not including) 4
+    group_tag = "StrayKids"
+    short_name = group_tag[0:5] # "Stray"`,
+      whyItMatters: "Strings are how your code communicates with humans. Master slicing and f-strings to build professional, dynamic user interfaces."
     },
     4: {
       title: "Boolean Logic",
       icon: <Layers size={20} />,
-      concept: "Logic is the engine of decision-making. Booleans (True/False) allow your code to choose different paths.",
+      concept: "Logic is the engine of decision-making. Booleans (True/False) act like digital switches that allow your code to choose different paths based on specific conditions.",
       variableExamples: [
-        { label: "Equality", value: "==", desc: "Checks if two things are the same." },
-        { label: "And", value: "and", desc: "True only if BOTH sides are true." },
-        { label: "Not", value: "not", desc: "Flips True to False and vice-versa." }
+        { label: "Comparison (==)", value: "Equality", desc: "Checks if two values are identical. Use != for 'Not Equal'." },
+        { label: "Logical (and/or)", value: "Gates", desc: "Combines multiple conditions into a single True/False result." },
+        { label: "Identity (in)", value: "Membership", desc: "Checks if a value exists inside a string or a collection." }
       ],
       dataTypesInfo: [
-        { type: "Greater Than", desc: "Compare values.", example: "fans > 1000" },
-        { type: "Not Equal", desc: "Check for difference.", example: "bias != 'None'" },
-        { type: "In Keyword", desc: "Check if text is inside.", example: "'S' in 'SKZ'" }
+        { type: "Greater Than (>)", desc: "Checks if the left value is larger than the right.", example: "8 > 3 # True" },
+        { type: "Logical 'not'", desc: "Inverse logic. Turns True to False and vice versa.", example: "not True # False" },
+        { type: "Identity 'in'", desc: "Checks for a substring within text.", example: "'Felix' in 'Lee Felix'" }
       ],
-      practicalExample: "Validating concert tickets or app permissions depends entirely on boolean results.",
-      exampleCode: `has_ticket = True\nis_on_list = False\ncan_enter = has_ticket and is_on_list\nprint(can_enter) # False`,
-      whyItMatters: "Logic errors are the hardest to find. Understanding 'Truthiness' is your strongest shield."
+      practicalExample: "Mission: Security clearance. Verify if a user has the correct ticket status and is on the approved guest list for the SKZ VIP lounge.",
+      exampleCode: `# 1. Equality & Inequality
+    bias = "Bang Chan"
+    is_leader = (bias == "Bang Chan")  # True
+    is_maknae = (bias != "I.N")         # True
+
+    # 2. Comparison: Concert Capacity
+    current_fans = 50000
+    capacity = 45000
+    is_sold_out = current_fans >= capacity  # True
+
+    # 3. Logical 'and': Both must be True
+    has_ticket = True
+    is_on_list = False
+    # User needs BOTH to enter
+    can_enter_lounge = has_ticket and is_on_list  # False
+
+    # 4. Logical 'or': Only one needs to be True
+    has_staff_pass = True
+    is_vip = False
+    can_access_backstage = has_staff_pass or is_vip  # True
+
+    # 5. Membership: Identity check
+    group = "Stray Kids"
+    is_skz = "Stray" in group  # True`,
+      whyItMatters: "Logic is the 'brain' of your code. Mastering these operators allows you to build complex systems like game mechanics or security firewalls."
     },
     5: {
       title: "Type Conversion",
       icon: <Code2 size={20} />,
-      concept: "Sometimes data arrives in the wrong format (like a number inside a string). Conversion (Casting) fixes this.",
+      concept: "Data often arrives in the 'wrong' type (e.g., numbers appearing as text). Conversion, or 'Casting,' allows you to force a value into a new type so you can perform specific operations.",
       variableExamples: [
-        { label: "str()", value: "to String", desc: "Turn a number into text." },
-        { label: "int()", value: "to Integer", desc: "Turn text or float into a whole number." },
-        { label: "float()", value: "to Float", desc: "Turn text or int into a decimal." }
+        { label: "int()", value: "To Integer", desc: "Converts text or decimals into whole numbers (rounds down)." },
+        { label: "float()", value: "To Float", desc: "Converts integers or text into precise decimal numbers." },
+        { label: "str()", value: "To String", desc: "Turns numbers or booleans into text for display." }
       ],
       dataTypesInfo: [
-        { type: "Casting str", desc: "Needed for concatenation.", example: "'Year: ' + str(2024)" },
-        { type: "Casting int", desc: "Removes decimals (truncates).", example: "int(8.9) # 8" },
-        { type: "Input Fix", desc: "User input is always text.", example: "int(input())" }
+        { type: "int(x)", desc: "Truncates decimals. int(9.9) becomes 9.", example: "int('10') # 10" },
+        { type: "float(x)", desc: "Adds a decimal point to whole numbers.", example: "float(5) # 5.0" },
+        { type: "str(x)", desc: "Essential for joining numbers with text.", example: "str(8) + ' members'" }
       ],
-      practicalExample: "When reading data from a website, numbers often come as text. You must convert them to do math.",
-      exampleCode: `price_text = '19.99'\n# price_total = price_text * 2  # This would repeat text!\nprice_total = float(price_text) * 2\nprint(price_total) # 39.98`,
-      whyItMatters: "TypeErrors are the #1 beginner mistake. Converting types manually puts you in full control."
+      practicalExample: "Mission: Process tour data. Convert raw text inputs from a website into numbers for calculation, then back to text for a report.",
+      exampleCode: `# 1. Converting String to Float for Math
+    # Data from web forms is always a string!
+    price_text = "24.99"
+    price_numeric = float(price_text)
+    total = price_numeric * 2  # 49.98
+
+    # 2. Converting Float to Int (Truncating)
+    # Let's say we have 8.7 liters of water, but can only fill whole bottles.
+    water = 8.7
+    bottles = int(water)  # 8
+
+    # 3. Converting Numbers to Strings
+    # You can't print "Members: " + 8 (it crashes!)
+    member_count = 8
+    message = "SKZ has " + str(member_count) + " members."
+
+    # 4. Nested Conversion
+    # Sometimes you have to go from String -> Float -> Int
+    raw_input = "14.5"
+    rounded_count = int(float(raw_input))  # 14
+
+    # 5. Boolean Conversion
+    # Empty things are False, filled things are True
+    print(bool(""))      # False
+    print(bool("Felix")) # True`,
+      whyItMatters: "TypeError is the most common crash for beginners. Explicitly converting your types ensures your program handles data predictably and safely."
     }
   };
 
