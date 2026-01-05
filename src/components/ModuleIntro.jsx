@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, BookOpen, Lightbulb, Zap, ArrowRight, Layers, Box, Repeat, List, Code2, Terminal } from 'lucide-react';
 
-const ModuleIntro = ({ moduleId, onBegin }) => {
+const ModuleIntro = ({ moduleId, onBegin, isReview }) => {
   const introData = {
     1: {
       title: "Variables & Data Types",
@@ -19,7 +19,10 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
         { type: "Booleans (bool)", desc: "True/False logic. Like 'Is on tour?'.", example: "True" }
       ],
       practicalExample: "Below is a live look at the SKZ database. Labels on the left are Variables holding the Data on the right.",
-      exampleCode: `# VARIABLE NAME  |  VALUE (DATA)\nbias            = 'Bang Chan'   # str\nalbums          = 14            # int\nis_on_tour      = True          # bool`,
+      exampleCode: `# VARIABLE NAME  |  VALUE (DATA)
+bias            = 'Bang Chan'   # str
+albums          = 14            # int
+is_on_tour      = True          # bool`,
       whyItMatters: "If you try to add 'Felix' + 5, Python will crash. Knowing your types keeps your code in sync!"
     },
     2: {
@@ -39,30 +42,29 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
         { type: "Modulo (%)", desc: "Finds the remainder.", example: "10 % 3 = 1" }
       ],
       practicalExample: "Mission: Calculate the stats for the upcoming SKZ World Tour. We need to handle track totals, time differences, and group divisions.",
-      exampleCode: `
-    # 1. Addition: Total members
-    vocal_line = 4
-    dance_line = 4
-    total_skz = vocal_line + dance_line  # 8
+      exampleCode: `# 1. Addition: Total members
+vocal_line = 4
+dance_line = 4
+total_skz = vocal_line + dance_line  # 8
 
-    # 2. Subtraction: Remaining tracks to perform
-    total_setlist = 25
-    performed = 10
-    remaining = total_setlist - performed  # 15
+# 2. Subtraction: Remaining tracks to perform
+total_setlist = 25
+performed = 10
+remaining = total_setlist - performed  # 15
 
-    # 3. Multiplication: Total tour duration
-    cities = 12
-    show_length = 2.5  # hours
-    total_hours = cities * show_length  # 30.0
+# 3. Multiplication: Total tour duration
+cities = 12
+show_length = 2.5  # hours
+total_hours = cities * show_length  # 30.0
 
-    # 4. Division: Average song length
-    total_album_time = 42.0
-    tracks = 12
-    avg_length = total_album_time / tracks  # 3.5
+# 4. Division: Average song length
+total_album_time = 42.0
+tracks = 12
+avg_length = total_album_time / tracks  # 3.5
 
-    # 5. Modulo: Grouping members for a unit
-    # If we divide 8 members into teams of 3, how many are left?
-    leftover = 8 % 3  # 2`,
+# 5. Modulo: Grouping members for a unit
+# If we divide 8 members into teams of 3, how many are left?
+leftover = 8 % 3  # 2`,
       whyItMatters: "Computers never make math mistakes, but humans do! Using '/' instead of '%' can lead to incorrect logic in your programs."
     },
     3: {
@@ -81,33 +83,33 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
       ],
       practicalExample: "Mission: Generate automated concert announcements and verify member nicknames from the SKZ global database.",
       exampleCode: `# 1. Concatenation: Joining text
-    prefix = "SKZ-"
-    id_num = "2024"
-    user_id = prefix + id_num  # "SKZ-2024"
+prefix = "SKZ-"
+id_num = "2024"
+user_id = prefix + id_num  # "SKZ-2024"
 
-    # 2. F-Strings: Dynamic messaging
-    member = "Felix"
-    venue = "SoFi Stadium"
-    # f-strings let you drop variables into {}
-    announcement = f"Welcome {member} to the stage at {venue}!"
+# 2. F-Strings: Dynamic messaging
+member = "Felix"
+venue = "SoFi Stadium"
+# f-strings let you drop variables into {}
+announcement = f"Welcome {member} to the stage at {venue}!"
 
-    # 3. String Methods: Formatting
-    song = "s-class"
-    print(song.upper())      # "S-CLASS"
-    print(song.capitalize()) # "S-class"
+# 3. String Methods: Formatting
+song = "s-class"
+print(song.upper())      # "S-CLASS"
+print(song.capitalize()) # "S-class"
 
-    # 4. Length: Validation
-    password = "skz_stay_forever"
-    length = len(password)   # 16
+# 4. Length: Validation
+password = "skz_stay_forever"
+length = len(password)   # 16
 
-    # 5. Indexing: Grab first letter
-    name = "Hyunjin"
-    first_initial = name[0]  # "H"
+# 5. Indexing: Grab first letter
+name = "Hyunjin"
+first_initial = name[0]  # "H"
 
-    # 6. Slicing: Extracting a 'Sub-string'
-    # Grabs characters from index 0 up to (but not including) 4
-    group_tag = "StrayKids"
-    short_name = group_tag[0:5] # "Stray"`,
+# 6. Slicing: Extracting a 'Sub-string'
+# Grabs characters from index 0 up to (but not including) 4
+group_tag = "StrayKids"
+short_name = group_tag[0:5] # "Stray"`,
       whyItMatters: "Strings are how your code communicates with humans. Master slicing and f-strings to build professional, dynamic user interfaces."
     },
     4: {
@@ -126,29 +128,29 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
       ],
       practicalExample: "Mission: Security clearance. Verify if a user has the correct ticket status and is on the approved guest list for the SKZ VIP lounge.",
       exampleCode: `# 1. Equality & Inequality
-    bias = "Bang Chan"
-    is_leader = (bias == "Bang Chan")  # True
-    is_maknae = (bias != "I.N")         # True
+bias = "Bang Chan"
+is_leader = (bias == "Bang Chan")  # True
+is_maknae = (bias != "I.N")         # True
 
-    # 2. Comparison: Concert Capacity
-    current_fans = 50000
-    capacity = 45000
-    is_sold_out = current_fans >= capacity  # True
+# 2. Comparison: Concert Capacity
+current_fans = 50000
+capacity = 45000
+is_sold_out = current_fans >= capacity  # True
 
-    # 3. Logical 'and': Both must be True
-    has_ticket = True
-    is_on_list = False
-    # User needs BOTH to enter
-    can_enter_lounge = has_ticket and is_on_list  # False
+# 3. Logical 'and': Both must be True
+has_ticket = True
+is_on_list = False
+# User needs BOTH to enter
+can_enter_lounge = has_ticket and is_on_list  # False
 
-    # 4. Logical 'or': Only one needs to be True
-    has_staff_pass = True
-    is_vip = False
-    can_access_backstage = has_staff_pass or is_vip  # True
+# 4. Logical 'or': Only one needs to be True
+has_staff_pass = True
+is_vip = False
+can_access_backstage = has_staff_pass or is_vip  # True
 
-    # 5. Membership: Identity check
-    group = "Stray Kids"
-    is_skz = "Stray" in group  # True`,
+# 5. Membership: Identity check
+group = "Stray Kids"
+is_skz = "Stray" in group  # True`,
       whyItMatters: "Logic is the 'brain' of your code. Mastering these operators allows you to build complex systems like game mechanics or security firewalls."
     },
     5: {
@@ -167,30 +169,30 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
       ],
       practicalExample: "Mission: Process tour data. Convert raw text inputs from a website into numbers for calculation, then back to text for a report.",
       exampleCode: `# 1. Converting String to Float for Math
-    # Data from web forms is always a string!
-    price_text = "24.99"
-    price_numeric = float(price_text)
-    total = price_numeric * 2  # 49.98
+# Data from web forms is always a string!
+price_text = "24.99"
+price_numeric = float(price_text)
+total = price_numeric * 2  # 49.98
 
-    # 2. Converting Float to Int (Truncating)
-    # Let's say we have 8.7 liters of water, but can only fill whole bottles.
-    water = 8.7
-    bottles = int(water)  # 8
+# 2. Converting Float to Int (Truncating)
+# Let's say we have 8.7 liters of water, but can only fill whole bottles.
+water = 8.7
+bottles = int(water)  # 8
 
-    # 3. Converting Numbers to Strings
-    # You can't print "Members: " + 8 (it crashes!)
-    member_count = 8
-    message = "SKZ has " + str(member_count) + " members."
+# 3. Converting Numbers to Strings
+# You can't print "Members: " + 8 (it crashes!)
+member_count = 8
+message = "SKZ has " + str(member_count) + " members."
 
-    # 4. Nested Conversion
-    # Sometimes you have to go from String -> Float -> Int
-    raw_input = "14.5"
-    rounded_count = int(float(raw_input))  # 14
+# 4. Nested Conversion
+# Sometimes you have to go from String -> Float -> Int
+raw_input = "14.5"
+rounded_count = int(float(raw_input))  # 14
 
-    # 5. Boolean Conversion
-    # Empty things are False, filled things are True
-    print(bool(""))      # False
-    print(bool("Felix")) # True`,
+# 5. Boolean Conversion
+# Empty things are False, filled things are True
+print(bool(""))      # False
+print(bool("Felix")) # True`,
       whyItMatters: "TypeError is the most common crash for beginners. Explicitly converting your types ensures your program handles data predictably and safely."
     }
   };
@@ -210,7 +212,9 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
             <div className="text-skz-green animate-pulse">
               {data.icon || <Zap size={20} />}
             </div>
-            <span className="text-skz-green font-black tracking-[0.3em] uppercase text-xs text-glow">Mission Briefing: Module 0{moduleId}</span>
+            <span className="text-skz-green font-black tracking-[0.3em] uppercase text-xs text-glow">
+              {isReview ? "Reference Document" : `Mission Briefing: Module 0${moduleId}`}
+            </span>
           </div>
           <h1 className="text-5xl md:text-6xl font-black italic uppercase tracking-tighter">
             {data.title}
@@ -291,7 +295,7 @@ const ModuleIntro = ({ moduleId, onBegin }) => {
             onClick={onBegin}
             className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-skz-green transition-all transform hover:scale-105 active:scale-95 flex items-center gap-3 shadow-xl"
           >
-            Start Mission <ArrowRight size={20} />
+            {isReview ? "Back to Mission" : "Start Mission"} <ArrowRight size={20} />
           </button>
         </div>
 
