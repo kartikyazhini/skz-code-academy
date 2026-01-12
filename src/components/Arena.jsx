@@ -34,7 +34,13 @@ const Arena = ({ lesson, userCode, setUserCode, onComplete, onBack, onShowIntro 
 
       if (data.success) {
         setConsoleOutput(data.output);
-        if (data.output.trim() === String(lesson.expectedOutput)) {
+
+        // 🛠️ FIX: Normalize outputs by trimming whitespace and unifying newline characters
+        // This prevents mismatches caused by hidden \r characters or trailing spaces
+        const actualOutput = data.output.trim().replace(/\r\n/g, "\n");
+        const expectedOutput = String(lesson.expectedOutput).trim().replace(/\r\n/g, "\n");
+
+        if (actualOutput === expectedOutput) {
           setStatus('success');
           confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
           setTimeout(onComplete, 2000);
@@ -77,7 +83,7 @@ const Arena = ({ lesson, userCode, setUserCode, onComplete, onBack, onShowIntro 
             <h2 className="text-3xl font-black italic uppercase tracking-tighter mb-4">{lesson.title}</h2>
             <p className="text-zinc-400 mb-6">{lesson.description}</p>
             <div className="bg-black/40 border border-zinc-800 p-6 rounded-2xl mb-6">
-              <p className="text-skz-green font-mono text-sm">{lesson.mission}</p>
+              <p className="text-skz-green font-mono text-sm whitespace-pre-wrap">{lesson.mission}</p>
             </div>
             <div className="flex items-start gap-3 p-4 bg-skz-green/5 border border-skz-green/10 rounded-2xl">
               <Lightbulb className="text-skz-green shrink-0" size={18} />
@@ -106,7 +112,7 @@ const Arena = ({ lesson, userCode, setUserCode, onComplete, onBack, onShowIntro 
           <div className="bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-8">
             <div className="mb-4 font-mono text-sm">
                <div className="text-zinc-600 text-[10px] uppercase font-black mb-2">Console Output</div>
-               <div className={status === 'success' ? 'text-skz-green' : 'text-white'}>
+               <div className={`whitespace-pre-wrap ${status === 'success' ? 'text-skz-green' : 'text-white'}`}>
                   {consoleOutput || "> Ready..."}
                </div>
                {error && <div className="text-red-500 text-xs mt-2 font-bold uppercase tracking-tight italic">Error: {error}</div>}
